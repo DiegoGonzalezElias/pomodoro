@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomodoro</title>
+    <script src="finisher-header.es5.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+      new FinisherHeader({
+        "count": 12,
+        "size": {
+          "min": 1300,
+          "max": 1500,
+          "pulse": 0
+        },
+        "speed": {
+          "x": {
+            "min": 0.6,
+            "max": 3
+          },
+          "y": {
+            "min": 0.6,
+            "max": 3
+          }
+        },
+        "colors": {
+          "background": "#4d61d2",
+          "particles": [
+            "#18e8d7",
+            "#4d61d2",
+            "#231efe",
+            "#ff0a53"
+          ]
+        },
+        "blending": "lighten",
+        "opacity": {
+          "center": 0.6,
+          "edge": 0
+        },
+        "skew": -2,
+        "shapes": [
+          "c"
+        ]
+      });
+      </script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
