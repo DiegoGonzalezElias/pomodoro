@@ -20,7 +20,7 @@
     watch(props.todo,(newValue) => {
       currentSessions.value = props.todo.currentSessions
       totalSessions.value = props.todo.totalSessions
-      
+      console.log("todocard: ",props.todo)
     }
     ,{deep:true});
 

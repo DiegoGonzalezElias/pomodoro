@@ -2,7 +2,7 @@
 import Clock from '../components/Clock.vue'
 import PomodoroCardGrid from './PomodoroCardGrid.vue';
 import { Icon } from '@iconify/vue';
-import { ref, watch } from "vue";
+import { ref, watch, computed } from "vue";
 import alert from '../assets/sounds/alert.mp3';
 
 const props = defineProps({
@@ -13,14 +13,20 @@ const props = defineProps({
     },
 })
 
+const sharedListItems = ref([]);
+watch(() => props.sharedListItems, (newValue) => {
+  sharedListItems.value = newValue;
+  console.log("props changed: ", sharedListItems.value);
+}, { deep: true });
+
 const localStorageList = ref([])
 
 function getLocalStorageTodos () {
     const savedTodoList = JSON.parse(localStorage.getItem("todoList"))
     console.log("props.shared: ",props.sharedListItems.value);
-    if (props.sharedListItems === undefined) {
+    if (props.sharedListItems.value === undefined) {
         localStorageList.value = savedTodoList
-        //console.log("LOCALSTORAGELIST: ",localStorageList.value)
+        console.log("LOCALSTORAGELIST: ",localStorageList.value)
     }
 }
 
@@ -29,7 +35,7 @@ getLocalStorageTodos();
 const selectedTodo = ref("");
 
 //timer logic
-const time = ref(5); // 25 minutos en segundos 1500
+const time = ref(1500); // 25 minutos en segundos 1500
 const isRunning = ref(false);
 let timer;
 
@@ -90,7 +96,7 @@ function handleButtonClick() {
 function handleResetTime(){
   stopTimer();
   isRunning.value=false;
-  time.value=5;
+  time.value=1500;
 }
 
 function formatTime(time) {
@@ -117,8 +123,8 @@ function padTime(value) {
                     <p>Select your todo</p>
                 </div>
                 <select v-model="selectedTodo">
-                    <option v-if="localStorageList.length > 0 & props.sharedListItems === undefined" v-for="todo in localStorageList">{{todo.todo}}</option>
-                    <option v-else v-for="todo in sharedListItems">{{todo.todo}}</option>    
+                    <option v-if="sharedListItems.length !== 0" v-for="todo in sharedListItems">{{todo.todo}}</option>
+                    <option v-else v-for="todo in localStorageList">{{todo.todo}}</option>    
                 </select>
                 <div class="buttons">
                   <button class="btn" @click="handleButtonClick">{{ isRunning ? 'Pause' : 'Start' }}</button>
@@ -129,8 +135,10 @@ function padTime(value) {
             </div>
         </div>
         <div class="cardsGrid">
-            <PomodoroCardGrid v-if="localStorageList.length > 0 & props.sharedListItems === undefined" :sharedListItems="localStorageList" :selectedTodo="selectedTodo"></PomodoroCardGrid>
-            <PomodoroCardGrid v-else :sharedListItems="props.sharedListItems" :selectedTodo="selectedTodo"></PomodoroCardGrid>
+          <PomodoroCardGrid
+            :sharedListItems="sharedListItems.length !== 0 ? sharedListItems : localStorageList"
+            :selectedTodo="selectedTodo"
+          ></PomodoroCardGrid>
         </div>
        
     </div>

@@ -1,6 +1,7 @@
 <script setup>
 import PomodoroCard from './PomodoroCard.vue';
 
+
 const props = defineProps({
     sharedListItems: {
         type: Array,
@@ -15,7 +16,13 @@ const props = defineProps({
   
 })
 
-//console.log("PomodoroCardGrid: ", props.sharedListItems)
+/* watch(props.sharedListItems,(newValue) => {
+ 
+  props.sharedListItems=newValue
+  console.log("PomodoroCardGrid: ", props.sharedListItems)
+}
+,{deep:true}); */
+
 
 </script>
 
