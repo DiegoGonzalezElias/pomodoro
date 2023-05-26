@@ -32,7 +32,7 @@
    
       savedTodoList.forEach(todo => {
         if (todo.todo === props.todo.todo) {
-          console.log(todo.todo)
+         // console.log(todo.todo)
           todo.currentSessions = currentSessions.value;  
           localStorage.setItem("todoList", JSON.stringify(savedTodoList))
         }
@@ -46,14 +46,14 @@
     
       savedTodoList.forEach(todo => {
         if (todo.todo === props.todo.todo) {
-          console.log(todo.todo)
+         // console.log(todo.todo)
           todo.totalSessions = totalSessions.value;
           localStorage.setItem("todoList", JSON.stringify(savedTodoList))
         }
       });
     };
 
-    console.log("TodoCard: ",props.todo.todo);
+   // console.log("TodoCard: ",props.todo.todo);
 </script>
 
 

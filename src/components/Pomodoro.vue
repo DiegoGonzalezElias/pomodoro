@@ -17,10 +17,10 @@ const localStorageList = ref([])
 
 function getLocalStorageTodos () {
     const savedTodoList = JSON.parse(localStorage.getItem("todoList"))
-    console.log("SHAREDLIST: ",props.sharedListItems.value);
+    //console.log("SHAREDLIST: ",props.sharedListItems.value);
     if (props.sharedListItems.length === 0) {
         localStorageList.value = savedTodoList
-        console.log("LOCALSTORAGELIST: ",localStorageList.value)
+        //console.log("LOCALSTORAGELIST: ",localStorageList.value)
     }
 }
 
@@ -46,21 +46,21 @@ function startTimer() {
       const audio = new Audio(alert);
       audio.play();
       //add +1 to todo.currentSessions
-      console.log("SEELECTED: ",selectedTodo.value);
+      //console.log("SEELECTED: ",selectedTodo.value);
       //localStorageList.value = SON.parse(localStorage.getItem("todoList"))
       if(selectedTodo != ""){
         localStorageList.value.forEach((todo)=>{
-          console.log(todo.todo);
+          //console.log(todo.todo);
           if (todo.todo === selectedTodo.value) {
             todo.currentSessions ++;
-            console.log("innerLocalStorage: ",localStorageList.value)
+            //console.log("innerLocalStorage: ",localStorageList.value)
           }
         })
         props.sharedListItems.forEach((todo)=>{
-          console.log("sharedList", todo)
+          //console.log("sharedList", todo)
           if (todo.todo === selectedTodo.value) {
             todo.currentSessions ++;
-            console.log("innerPROPS: ",props.sharedListItems)
+           // console.log("innerPROPS: ",props.sharedListItems)
           }
         })
       }

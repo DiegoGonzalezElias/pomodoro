@@ -15,7 +15,7 @@ const props = defineProps({
   
 })
 
-console.log("PomodoroCardGrid: ", props.sharedListItems)
+//console.log("PomodoroCardGrid: ", props.sharedListItems)
 
 </script>
 

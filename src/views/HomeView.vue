@@ -7,7 +7,7 @@ const sharedListItems = ref([]);
 
 const updateTodoList = (newList) => {
   sharedListItems.value = newList
-  console.log("UPDATED SHARED-List: ",sharedListItems.value);
+  //console.log("UPDATED SHARED-List: ",sharedListItems.value);
 
 }
 </script>
