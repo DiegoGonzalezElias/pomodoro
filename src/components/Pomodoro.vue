@@ -17,8 +17,8 @@ const localStorageList = ref([])
 
 function getLocalStorageTodos () {
     const savedTodoList = JSON.parse(localStorage.getItem("todoList"))
-    //console.log("SHAREDLIST: ",props.sharedListItems.value);
-    if (props.sharedListItems.length === 0) {
+    console.log("props.shared: ",props.sharedListItems.value);
+    if (props.sharedListItems === undefined) {
         localStorageList.value = savedTodoList
         //console.log("LOCALSTORAGELIST: ",localStorageList.value)
     }
@@ -117,7 +117,7 @@ function padTime(value) {
                     <p>Select your todo</p>
                 </div>
                 <select v-model="selectedTodo">
-                    <option v-if="localStorageList.length > 0 & props.sharedListItems.length === 0" v-for="todo in localStorageList">{{todo.todo}}</option>
+                    <option v-if="localStorageList.length > 0 & props.sharedListItems === undefined" v-for="todo in localStorageList">{{todo.todo}}</option>
                     <option v-else v-for="todo in sharedListItems">{{todo.todo}}</option>    
                 </select>
                 <div class="buttons">
@@ -129,7 +129,7 @@ function padTime(value) {
             </div>
         </div>
         <div class="cardsGrid">
-            <PomodoroCardGrid v-if="localStorageList.length > 0 & props.sharedListItems.length === 0" :sharedListItems="localStorageList" :selectedTodo="selectedTodo"></PomodoroCardGrid>
+            <PomodoroCardGrid v-if="localStorageList.length > 0 & props.sharedListItems === undefined" :sharedListItems="localStorageList" :selectedTodo="selectedTodo"></PomodoroCardGrid>
             <PomodoroCardGrid v-else :sharedListItems="props.sharedListItems" :selectedTodo="selectedTodo"></PomodoroCardGrid>
         </div>
        
